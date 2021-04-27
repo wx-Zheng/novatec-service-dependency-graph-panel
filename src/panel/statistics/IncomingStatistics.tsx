@@ -1,6 +1,6 @@
 import React from 'react';
 import { TableContent } from 'types';
-
+//这个文件没有用到
 export const NodeStatistics = (receiving: TableContent[]) => {
   return (
     <div>

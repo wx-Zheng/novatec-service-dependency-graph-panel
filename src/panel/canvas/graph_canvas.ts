@@ -563,16 +563,16 @@ export default class CanvasDrawer {
 
     if (requestCount >= 0) {
       const decimals = requestCount >= 1000 ? 1 : 0;
-      lines.push('Requests: ' + humanFormat(parseFloat(requestCount.toString()), { decimals }));
+      lines.push('请求数: ' + humanFormat(parseFloat(requestCount.toString()), { decimals }));
     }
     if (errorCount >= 0) {
       const decimals = errorCount >= 1000 ? 1 : 0;
-      lines.push('Errors: ' + humanFormat(errorCount, { decimals }));
+      lines.push('异常数: ' + humanFormat(errorCount, { decimals }));
     }
     if (responseTime >= 0) {
       const decimals = responseTime >= 1000 ? 1 : 0;
 
-      lines.push('Avg. Resp. Time: ' + humanFormat(responseTime, { scale: timeScale, decimals }));
+      lines.push('平均响应时间: ' + humanFormat(responseTime, { scale: timeScale, decimals }));
     }
 
     const pos = node.position();

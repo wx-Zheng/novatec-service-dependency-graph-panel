@@ -11,10 +11,10 @@ interface NodeStatisticsProps {
 }
 
 const tableHeaders: IntTableHeader[] = [
-  { text: 'Name', dataField: 'name', sort: true, isKey: true },
-  { text: 'Time', dataField: 'time', sort: true, ignoreLiteral: ' ms' },
-  { text: 'Requests', dataField: 'requests', sort: true, ignoreLiteral: '' },
-  { text: 'Error Rate', dataField: 'error_rate', sort: true, ignoreLiteral: '%' },
+  { text: '名称', dataField: 'name', sort: true, isKey: true },
+  { text: '时间', dataField: 'time', sort: true, ignoreLiteral: ' ms' },
+  { text: '请求数', dataField: 'requests', sort: true, ignoreLiteral: '' },
+  { text: '异常占比', dataField: 'error_rate', sort: true, ignoreLiteral: '%' },
 ];
 
 function getStatisticsTable(noDataText: string, nodeList: TableContent[]) {
