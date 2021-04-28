@@ -76,7 +76,7 @@ export const Statistics: React.FC<StatisticsProps> = ({
         </tr>
       ) : null;
     var threshold = selectionStatistics.thresholdViolation ? (
-      <td className="table--td--selection threshold--bad"> 异常 (&lt;= {selectionStatistics.threshold}ms) </td>
+      <td className="table--td--selection threshold--bad"> 异常 (&lt;= {selectionStatistics.threshold}) </td>
     ) : (
       <td className="table--td--selection threshold--good">
         正常 ({'>'} {selectionStatistics.threshold})
