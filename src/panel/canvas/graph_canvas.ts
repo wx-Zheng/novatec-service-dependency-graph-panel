@@ -323,7 +323,7 @@ export default class CanvasDrawer {
   }
 
   _drawEdgeLabel(ctx: CanvasRenderingContext2D, edge: cytoscape.EdgeSingular) {
-    const { timeFormat } = this.controller.getSettings(true);
+    // const { timeFormat } = this.controller.getSettings(true);
 
     const midpoint = edge.midpoint();
     const xMid = midpoint.x;
@@ -331,23 +331,25 @@ export default class CanvasDrawer {
 
     let statistics: string[] = [];
     const metrics: IntGraphMetrics = edge.data('metrics');
-    const duration = _.defaultTo(metrics.response_time, -1);
+    // const duration = _.defaultTo(metrics.response_time, -1);
     const requestCount = _.defaultTo(metrics.rate, -1);
     const errorCount = _.defaultTo(metrics.error_rate, -1);
+    const slowCnt = _.defaultTo(metrics.slow_cnt, -1);
 
-    const timeScale = new humanFormat.Scale(this._getTimeScale(timeFormat));
+    // const timeScale = new humanFormat.Scale(this._getTimeScale(timeFormat));
 
-    if (duration >= 0) {
-      const decimals = duration >= 1000 ? 1 : 0;
-      statistics.push(humanFormat(duration, { scale: timeScale, decimals }));
-    }
+
     if (requestCount >= 0) {
       const decimals = requestCount >= 1000 ? 1 : 0;
-      statistics.push(humanFormat(parseFloat(requestCount.toString()), { decimals }) + ' Requests');
+      statistics.push(humanFormat(parseFloat(requestCount.toString()), { decimals }) + ' 请求');
     }
     if (errorCount >= 0) {
       const decimals = errorCount >= 1000 ? 1 : 0;
-      statistics.push(humanFormat(errorCount, { decimals }) + ' Errors');
+      statistics.push(humanFormat(errorCount, { decimals }) + '异常');
+    }
+    if (slowCnt >= 0) {
+      const decimals = slowCnt >= 1000 ? 1 : 0;
+      statistics.push(humanFormat(slowCnt, { decimals }) + '慢响应');
     }
 
     if (statistics.length > 0) {
@@ -551,15 +553,17 @@ export default class CanvasDrawer {
   }
 
   _drawNodeStatistics(ctx: CanvasRenderingContext2D, node: cytoscape.NodeSingular) {
-    const { timeFormat } = this.controller.getSettings(true);
+    // const { timeFormat } = this.controller.getSettings(true);
     const lines: string[] = [];
 
     const metrics: IntGraphMetrics = node.data('metrics');
     const requestCount = _.defaultTo(metrics.rate, -1);
     const errorCount = _.defaultTo(metrics.error_rate, -1);
-    const responseTime = _.defaultTo(metrics.response_time, -1);
+    // const responseTime = _.defaultTo(metrics.response_time, -1);
+    const slowCnt = _.defaultTo(metrics.slow_cnt, -1);
 
-    const timeScale = new humanFormat.Scale(this._getTimeScale(timeFormat));
+
+    // const timeScale = new humanFormat.Scale(this._getTimeScale(timeFormat));
 
     if (requestCount >= 0) {
       const decimals = requestCount >= 1000 ? 1 : 0;
@@ -569,10 +573,14 @@ export default class CanvasDrawer {
       const decimals = errorCount >= 1000 ? 1 : 0;
       lines.push('异常数: ' + humanFormat(errorCount, { decimals }));
     }
-    if (responseTime >= 0) {
-      const decimals = responseTime >= 1000 ? 1 : 0;
-
-      lines.push('平均响应时间: ' + humanFormat(responseTime, { scale: timeScale, decimals }));
+    // if (responseTime >= 0) {
+    //   const decimals = responseTime >= 1000 ? 1 : 0;
+    //
+    //   lines.push('平均响应时间: ' + humanFormat(responseTime, { scale: timeScale, decimals }));
+    // }
+    if (errorCount >= 0) {
+      const decimals = errorCount >= 1000 ? 1 : 0;
+      lines.push('慢请求数: ' + humanFormat(slowCnt, { decimals }));
     }
 
     const pos = node.position();
