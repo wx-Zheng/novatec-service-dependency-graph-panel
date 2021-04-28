@@ -158,6 +158,10 @@ class PreProcessor {
       requestRateColumn,
       requestRateOutgoingColumn,
       baselineRtUpper,
+      //健康度得分
+      healthScore,
+      slowCntColumn,
+      slowCntOutgoingColumn
     } = this.controller.getSettings(true).dataMapping;
 
     for (const inputData of inputDataSets) {
@@ -178,6 +182,11 @@ class PreProcessor {
       const requestRateColumnField = _.find(fields, ['name', requestRateColumn]);
       const requestRateOutgoingColumnField = _.find(fields, ['name', requestRateOutgoingColumn]);
       const responseTimeBaselineField = _.find(fields, ['name', baselineRtUpper]);
+      //健康度得分
+      const healthScoreField = _.find(fields, ['name', healthScore]);
+
+      const slowCntColumnField = _.find(fields, ['name', slowCntColumn]);
+      const slowCntOutgoingColumnField = _.find(fields, ['name', slowCntOutgoingColumn]);
 
       for (let i = 0; i < inputData.length; i++) {
         const row: any = {};
@@ -194,6 +203,11 @@ class PreProcessor {
         row['rate_out'] = requestRateOutgoingColumnField?.values.get(i);
         row['threshold'] = responseTimeBaselineField?.values.get(i);
         row['type'] = typeField?.values.get(i);
+        //健康度得分
+        row['health_score'] = healthScoreField?.values.get(i);
+        //慢的
+        row['slow_in'] = slowCntColumnField?.values.get(i);
+        row['slow_out'] = slowCntOutgoingColumnField?.values.get(i);
         // The above code returns { "": undefined } for values that do not exist.
         // These values are filtered by this line.
         Object.keys(row).forEach(key => (row[key] === undefined || row[key] === '') && delete row[key]);

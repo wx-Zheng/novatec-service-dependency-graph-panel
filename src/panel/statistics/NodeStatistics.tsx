@@ -12,9 +12,9 @@ interface NodeStatisticsProps {
 
 const tableHeaders: IntTableHeader[] = [
   { text: '名称', dataField: 'name', sort: true, isKey: true },
-  { text: '时间', dataField: 'time', sort: true, ignoreLiteral: ' ms' },
   { text: '请求数', dataField: 'requests', sort: true, ignoreLiteral: '' },
   { text: '异常占比', dataField: 'error_rate', sort: true, ignoreLiteral: '%' },
+  { text: '慢响应数', dataField: 'slow_cnt', sort: true, ignoreLiteral: '' },
 ];
 
 function getStatisticsTable(noDataText: string, nodeList: TableContent[]) {
@@ -25,7 +25,7 @@ function getStatisticsTable(noDataText: string, nodeList: TableContent[]) {
         data={nodeList.map((node: TableContent) => {
           return {
             name: node.name,
-            time: node.responseTime,
+            slow_cnt: node.slowCnt,
             requests: node.rate,
             error_rate: roundPercentageToDecimal(2, node.error),
           };

@@ -305,6 +305,9 @@ export class ServiceDependencyGraph extends PureComponent<PanelState, PanelState
       const errorCount = _.defaultTo(metrics.error_rate, -1);
       const duration = _.defaultTo(metrics.response_time, -1);
       const threshold = _.defaultTo(metrics.threshold, -1);
+      const healthScore = _.defaultTo(metrics.health_score, -1);
+      const slowCnt = _.defaultTo(metrics.slow_cnt, -1);
+
 
       this.selectionStatistics = {};
 
@@ -319,9 +322,14 @@ export class ServiceDependencyGraph extends PureComponent<PanelState, PanelState
 
         if (threshold >= 0) {
           this.selectionStatistics.threshold = Math.floor(threshold);
-          this.selectionStatistics.thresholdViolation = duration > threshold;
+          this.selectionStatistics.thresholdViolation = healthScore > threshold;
         }
       }
+      //健康度得分
+      if (healthScore >= 0) {
+        this.selectionStatistics.healthScore = Math.floor(healthScore);
+      }
+
 
       for (let i = 0; i < edges.length; i++) {
         const actualEdge: EdgeSingular = edges[i];
@@ -339,12 +347,13 @@ export class ServiceDependencyGraph extends PureComponent<PanelState, PanelState
           responseTime: '-',
           rate: '-',
           error: '-',
+          healthScore: '-',
+          slowCnt:'-'
         };
 
         const edgeMetrics: IntGraphMetrics = actualEdge.data('metrics');
-
         if (edgeMetrics !== undefined) {
-          const { response_time, rate, error_rate } = edgeMetrics;
+          const { response_time, rate, error_rate , health_score} = edgeMetrics;
 
           if (rate !== undefined) {
             sendingObject.rate = Math.floor(rate).toString();
@@ -354,6 +363,12 @@ export class ServiceDependencyGraph extends PureComponent<PanelState, PanelState
           }
           if (error_rate !== undefined && rate !== undefined) {
             sendingObject.error = Math.floor(error_rate / (rate / 100)) + '%';
+          }
+          if (health_score !== undefined) {
+            sendingObject.healthScore = Math.floor(health_score).toString();
+          }
+          if (health_score !== undefined) {
+            sendingObject.slowCnt = Math.floor(slowCnt).toString();
           }
         }
 

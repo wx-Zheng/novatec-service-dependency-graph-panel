@@ -33,6 +33,9 @@ export interface DataMapping {
   showDummyData: boolean;
 
   baselineRtUpper: string;
+  healthScore: string;
+  slowCntColumn:string;
+  slowCntOutgoingColumn:string;
 }
 
 export interface PanelStyleSettings {
@@ -85,6 +88,9 @@ export interface DataElement {
   error_rate_out?: number;
   type?: string;
   threshold?: number;
+  health_score:number;
+  slow_in:number;
+  slow_out:number;
 }
 
 export enum GraphDataType {
@@ -117,6 +123,9 @@ export interface IntGraphMetrics {
   response_time?: number;
   success_rate?: number;
   threshold?: number;
+  slow_cnt?: number;
+  //健康度得分
+  health_score?:number;
 }
 
 export enum EnGraphNodeType {
@@ -152,6 +161,8 @@ export interface TableContent {
   responseTime: string;
   rate: string;
   error: string;
+  slowCnt:string;
+  healthScore:string
 }
 
 export interface IntSelectionStatistics {
@@ -160,6 +171,7 @@ export interface IntSelectionStatistics {
   responseTime?: number;
   threshold?: number;
   thresholdViolation?: boolean;
+  healthScore?:number;
 }
 
 export interface CyCanvas {
@@ -183,7 +195,7 @@ export interface IntTableHeader {
 
 export interface NodeData {
   name: string;
-  time: string;
+  slow_cnt: string;
   requests: string;
   error_rate: string;
 }

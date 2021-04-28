@@ -15,7 +15,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<PanelSettings>
         id: 'aggregationType',
         editor: TypeaheadTextField,
         name: 'Component Column',
-        category: ['Connection Mapping'],
+        category: ['节点关系映射'],
         defaultValue: DefaultSettings.dataMapping.aggregationType,
       })
 
@@ -24,7 +24,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<PanelSettings>
         id: 'sourceComponentPrefix',
         editor: TypeaheadTextField,
         name: 'Source Component Column',
-        category: ['Connection Mapping'],
+        category: ['节点关系映射'],
         defaultValue: DefaultSettings.dataMapping.sourceColumn,
       })
 
@@ -32,7 +32,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<PanelSettings>
         path: 'dataMapping.targetColumn',
         id: 'targetComponentPrefix',
         name: 'Target Component Column',
-        category: ['Connection Mapping'],
+        category: ['节点关系映射'],
         editor: TypeaheadTextField,
         defaultValue: DefaultSettings.dataMapping.targetColumn,
       })
@@ -41,7 +41,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<PanelSettings>
         path: 'dataMapping.type',
         id: 'type',
         name: 'Type',
-        category: ['Connection Mapping'],
+        category: ['节点关系映射'],
         editor: TypeaheadTextField,
         defaultValue: DefaultSettings.dataMapping.type,
       })
@@ -50,7 +50,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<PanelSettings>
         path: 'dataMapping.extOrigin',
         id: 'externalOrigin',
         name: 'External Origin',
-        category: ['Connection Mapping'],
+        category: ['节点关系映射'],
         editor: TypeaheadTextField,
         defaultValue: DefaultSettings.dataMapping.extOrigin,
       })
@@ -59,74 +59,100 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<PanelSettings>
         path: 'dataMapping.extTarget',
         id: 'externalTarget',
         name: 'External Target',
-        category: ['Connection Mapping'],
+        category: ['节点关系映射'],
         editor: TypeaheadTextField,
         defaultValue: DefaultSettings.dataMapping.extTarget,
       })
 
-      //Data Mapping
+      //数据映射
       .addCustomEditor({
         id: 'responseTime',
         path: 'dataMapping.responseTimeColumn',
-        name: 'Response Time Column',
+        name: '响应时间（废弃）',
         editor: TypeaheadTextField,
-        category: ['Data Mapping'],
+        category: ['数据映射'],
         defaultValue: DefaultSettings.dataMapping.responseTimeColumn,
       })
 
       .addCustomEditor({
         id: 'requestRateColumn',
         path: 'dataMapping.requestRateColumn',
-        name: 'Request Rate Column',
+        name: '请求数',
         editor: TypeaheadTextField,
-        category: ['Data Mapping'],
+        category: ['数据映射'],
         defaultValue: DefaultSettings.dataMapping.requestRateColumn,
       })
 
       .addCustomEditor({
         id: 'errorRateColumn',
         path: 'dataMapping.errorRateColumn',
-        name: 'Error Rate Column',
+        name: '异常数',
         editor: TypeaheadTextField,
-        category: ['Data Mapping'],
+        category: ['数据映射'],
         defaultValue: DefaultSettings.dataMapping.errorRateColumn,
       })
 
       .addCustomEditor({
         id: 'responseTimeOutgoingColumn',
         path: 'dataMapping.responseTimeOutgoingColumn',
-        name: 'Response Time Column (Outgoing)',
+        name: '响应时效件（提供者）（废弃）',
         editor: TypeaheadTextField,
-        category: ['Data Mapping'],
+        category: ['数据映射'],
         defaultValue: DefaultSettings.dataMapping.responseTimeOutgoingColumn,
       })
 
       .addCustomEditor({
         id: 'requestRateOutgoingColumn',
         path: 'dataMapping.requestRateOutgoingColumn',
-        name: 'Request Rate Column (Outgoing)',
+        name: '请求数 (提供者)',
         editor: TypeaheadTextField,
-        category: ['Data Mapping'],
+        category: ['数据映射'],
         defaultValue: DefaultSettings.dataMapping.requestRateOutgoingColumn,
       })
 
       .addCustomEditor({
         id: 'errorRateOutgoingColumn',
         path: 'dataMapping.errorRateOutgoingColumn',
-        name: 'Error Rate Column (Outgoing)',
+        name: '异常数（提供者）',
         editor: TypeaheadTextField,
-        category: ['Data Mapping'],
+        category: ['数据映射'],
         defaultValue: DefaultSettings.dataMapping.errorRateOutgoingColumn,
       })
 
       .addCustomEditor({
+        id: 'slowCntOutgoingColumn',
+        path: 'dataMapping.slowCntOutgoingColumn',
+        name: '慢响应',
+        editor: TypeaheadTextField,
+        category: ['数据映射'],
+        defaultValue: DefaultSettings.dataMapping.slowCntOutgoingColumn,
+      })
+      .addCustomEditor({
+        id: 'slowCntColumn',
+        path: 'dataMapping.slowCntColumn',
+        name: '慢响应 (提供者)',
+        editor: TypeaheadTextField,
+        category: ['数据映射'],
+        defaultValue: DefaultSettings.dataMapping.slowCntColumn,
+      })
+      .addCustomEditor({
         id: 'baselineRtUpper',
         path: 'dataMapping.baselineRtUpper',
-        name: 'Response Time Baseline (Upper)',
+        name: '健康度阈值',
         editor: TypeaheadTextField,
-        category: ['Data Mapping'],
+        category: ['数据映射'],
         defaultValue: DefaultSettings.dataMapping.baselineRtUpper,
       })
+      //健康度得分
+      .addCustomEditor({
+        id: 'healthScore',
+        path: 'dataMapping.healthScore',
+        name: '健康度得分',
+        editor: TypeaheadTextField,
+        category: ['数据映射'],
+        defaultValue: DefaultSettings.dataMapping.healthScore,
+      })
+
 
       //General Settings
       .addBooleanSwitch({

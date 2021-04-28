@@ -21,6 +21,9 @@ export const DefaultSettings: PanelSettings = {
 
     baselineRtUpper: 'threshold',
 
+    healthScore:'health_score',
+    slowCntColumn: 'slow_cnt',
+    slowCntOutgoingColumn: 'slow_cnt_out',
     showDummyData: false,
   },
 

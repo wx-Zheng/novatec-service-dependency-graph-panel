@@ -26,6 +26,7 @@ export const Statistics: React.FC<StatisticsProps> = ({
   receiving,
   sending,
 }) => {
+  debugger;
   var statisticsClass = 'statistics';
   var statistics = <div></div>;
   if (show) {
@@ -68,27 +69,26 @@ export const Statistics: React.FC<StatisticsProps> = ({
         </tr>
       ) : null;
 
-    var avgResponseTime =
-      selectionStatistics.responseTime >= 0 ? (
-        <tr>
-          <td className="table--td--selection">平均响应时间</td>
-          <td className="table--td--selection">{selectionStatistics.responseTime} ms</td>
-        </tr>
-      ) : null;
+    // var avgResponseTime =
+    //   selectionStatistics.responseTime >= 0 ? (
+    //     <tr>
+    //       <td className="table--td--selection">平均响应时间</td>
+    //       <td className="table--td--selection">{selectionStatistics.responseTime} ms</td>
+    //     </tr>
+    //   ) : null;
     var threshold = selectionStatistics.thresholdViolation ? (
-      <td className="table--td--selection threshold--bad"> 异常 (&lt;= {selectionStatistics.threshold}) </td>
+      <td className="table--td--selection threshold--good"> 健康 ({selectionStatistics.healthScore}{'>'} {selectionStatistics.threshold}) </td>
     ) : (
-      <td className="table--td--selection threshold--good">
-        正常 ({'>'} {selectionStatistics.threshold})
-      </td>
+      <td className="table--td--selection threshold--bad"> 不健康 ({selectionStatistics.healthScore}{'<='} {selectionStatistics.threshold})</td>
     );
     var baseline =
       showBaselines && selectionStatistics.threshold ? (
         <tr>
-          <td className="table--td--selection">健康度得分</td>
+          <td className="table--td--selection">健康度</td>
           {threshold}
         </tr>
       ) : null;
+
 
     statistics = (
       <div className="statistics">
@@ -96,7 +96,6 @@ export const Statistics: React.FC<StatisticsProps> = ({
           {selectionId}
           {drilldownLink}
         </div>
-
         <div className="secondHeader--selection">统计</div>
         <table className="table--selection">
           <tr className="table--selection--head">
@@ -106,7 +105,7 @@ export const Statistics: React.FC<StatisticsProps> = ({
           {requests}
           {errors}
           {errorRate}
-          {avgResponseTime}
+          {/*{avgResponseTime}*/}
           {baseline}
         </table>
 

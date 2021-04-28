@@ -52,15 +52,18 @@ class GraphGenerator {
     if (internalNode) {
       metrics.rate = _.sum(_.map(dataElements, element => element.data.rate_in));
       metrics.error_rate = _.sum(_.map(dataElements, element => element.data.error_rate_in));
-
       const response_timings = _.map(dataElements, element => element.data.response_time_in).filter(isPresent);
       if (response_timings.length > 0) {
         metrics.response_time = aggregationFunction(response_timings);
       }
+      metrics.health_score=  _.sum(_.map(dataElements, element => element.data.health_score));
+      metrics.slow_cnt = _.sum(_.map(dataElements, element => element.data.slow_in));
+
     } else {
       metrics.rate = _.sum(_.map(dataElements, element => element.data.rate_out));
       metrics.error_rate = _.sum(_.map(dataElements, element => element.data.error_rate_out));
-
+      metrics.health_score=  _.sum(_.map(dataElements, element => element.data.health_score));
+      metrics.slow_cnt = _.sum(_.map(dataElements, element => element.data.slow_out));
       const response_timings = _.map(dataElements, element => element.data.response_time_out).filter(isPresent);
       if (response_timings.length > 0) {
         metrics.response_time = aggregationFunction(response_timings);
@@ -172,7 +175,7 @@ class GraphGenerator {
       },
     };
 
-    const { rate_out, rate_in, error_rate_out, response_time_out } = dataElement.data;
+    const { rate_out, rate_in, error_rate_out, response_time_out,health_score,slow_in,slow_out } = dataElement.data;
     if (!_.isUndefined(rate_out)) {
       metrics.rate = rate_out;
     } else if (!_.isUndefined(rate_in)) {
@@ -190,7 +193,15 @@ class GraphGenerator {
         metrics.response_time = response_time_out;
       }
     }
+    if (!_.isUndefined(health_score)) {
+      metrics.health_score = health_score;
+    }
 
+    if (!_.isUndefined(slow_in)) {
+      metrics.slow_cnt = slow_in;
+    } else if (!_.isUndefined(slow_out)) {
+      metrics.slow_cnt = slow_out;
+    }
     return edge;
   }
 

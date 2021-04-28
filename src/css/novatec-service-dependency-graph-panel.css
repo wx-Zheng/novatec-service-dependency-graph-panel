@@ -40,7 +40,7 @@
 }
 
 .statistics.show {
-  flex-basis: 30rem;
+  flex-basis: 50rem;
   padding-left: 0.5%;
 }
 
@@ -100,7 +100,7 @@
 }
 
 .table--selection--head {
-  background-color: #28282a;
+  background-color: #F8F8F9;
   border-top: 2px solid #161719;
   color: #33b5e5;
 }
