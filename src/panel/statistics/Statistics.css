@@ -10,6 +10,11 @@
   }
   
   .statistics.show {
-    flex-basis: 50rem;
+    flex-basis: 30rem;
     padding-left: 0.5%;
   }
+
+.statistics-first-col {
+  flex-basis: 60rem;
+  padding-left: 0.5%;
+}
